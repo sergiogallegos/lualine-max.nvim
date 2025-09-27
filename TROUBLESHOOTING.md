@@ -154,9 +154,16 @@ require('lualine').setup({
 - Specific components don't work
 - Error messages in `:messages`
 - Components show as empty
+- `package.loaded` errors
 
 **Solution:**
 ```lua
+-- Quick fix for component errors
+:lua dofile('COMPONENT_ERROR_FIX.lua').quick_fix()
+
+-- Or run complete fix
+:lua dofile('COMPONENT_ERROR_FIX.lua').fix_component_errors()
+
 -- Test individual components
 :lua print(require('lualine.components.mode'))
 :lua print(require('lualine.components.branch'))
@@ -170,6 +177,22 @@ require('lualine').setup({
     lualine_c = { 'filename' },  -- Instead of 'smart_filename'
   },
 })
+```
+
+### **Issue 7: Package.loaded Errors**
+
+**Symptoms:**
+- `attempt to index field 'loaded' (a nil value)`
+- Component loading failures
+- Git branch component errors
+
+**Solution:**
+```lua
+-- Fix package.loaded errors
+:lua dofile('COMPONENT_ERROR_FIX.lua').fix_package_loaded_errors()
+
+-- Or fix git branch component specifically
+:lua dofile('COMPONENT_ERROR_FIX.lua').fix_git_branch_component()
 ```
 
 ---
