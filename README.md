@@ -344,6 +344,27 @@ MIT License - see [LICENSE](./LICENSE) for details.
 - Neovim community for feedback and contributions
 - All contributors who helped make this possible
 
+## 🔧 Component Loading
+
+lualine-max includes safe component loading with automatic fallbacks:
+
+```lua
+-- Safe component loading with fallbacks
+require('lualine').setup({
+  options = { theme = 'minimal' },
+  sections = {
+    lualine_a = { 'modern_mode' },      -- Falls back to 'mode'
+    lualine_b = { 'minimal_git' },      -- Falls back to 'branch'
+    lualine_c = { 'smart_filename' },   -- Falls back to 'filename'
+    lualine_x = { 'smart_diagnostics' }, -- Falls back to 'diagnostics'
+    lualine_y = { 'progress' },
+    lualine_z = { 'location' },
+  },
+})
+```
+
+See [examples/safe_components.lua](./examples/safe_components.lua) for detailed component loading examples.
+
 ## 🧪 Testing
 
 lualine-max includes comprehensive testing with 87.5% coverage:

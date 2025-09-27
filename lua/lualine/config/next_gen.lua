@@ -2,6 +2,7 @@
 -- MIT license, see LICENSE for more details.
 
 local utils = require('lualine.utils.utils')
+local component_loader = require('lualine.utils.component_loader')
 
 ---@class NextGenLualineConfig
 ---@field options table
@@ -190,19 +191,19 @@ end
 local function get_optimized_sections(config)
   local sections = vim.deepcopy(config.sections)
   
-  -- Apply AI optimizations
+  -- Apply AI optimizations with safe component loading
   if config.ai_features.smart_components.enabled then
-    -- Replace static components with smart ones
+    -- Replace static components with smart ones using safe loader
     for section, components in pairs(sections) do
       for i, component in ipairs(components) do
         if component == 'diagnostics' then
-          components[i] = 'smart_diagnostics'
+          components[i] = component_loader.safe_component('smart_diagnostics', 'diagnostics')
         elseif component == 'filename' then
-          components[i] = 'smart_filename'
+          components[i] = component_loader.safe_component('smart_filename', 'filename')
         elseif component == 'git' or component == 'branch' then
-          components[i] = 'minimal_git'
+          components[i] = component_loader.safe_component('minimal_git', 'branch')
         elseif component == 'mode' then
-          components[i] = 'modern_mode'
+          components[i] = component_loader.safe_component('modern_mode', 'mode')
         end
       end
     end
