@@ -195,6 +195,25 @@ require('lualine').setup({
 :lua dofile('COMPONENT_ERROR_FIX.lua').fix_git_branch_component()
 ```
 
+### **Issue 8: Gitsigns Preload Errors**
+
+**Symptoms:**
+- `attempt to index field 'preload' (a nil value)`
+- Gitsigns.nvim errors after lazy sync
+- Git integration failures
+
+**Solution:**
+```lua
+-- Fix gitsigns preload error
+:lua dofile('GITSIGNS_ERROR_FIX.lua').fix_gitsigns_preload_error()
+
+-- Or disable gitsigns temporarily
+:lua dofile('GITSIGNS_ERROR_FIX.lua').disable_gitsigns()
+
+-- Or fix both lualine and gitsigns
+:lua dofile('GITSIGNS_ERROR_FIX.lua').fix_both_errors()
+```
+
 ---
 
 ## 🔍 **Diagnostic Commands**
