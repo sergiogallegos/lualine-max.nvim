@@ -564,6 +564,73 @@ See [examples/safe_components.lua](./examples/safe_components.lua) for detailed 
 }
 ```
 
+## 🔧 Troubleshooting
+
+### **Common Issues**
+
+#### **Lazy Sync Fails**
+```lua
+-- Run diagnostic and fix
+:lua dofile('CRITICAL_FIX.lua')
+```
+
+#### **Black Statusline (No Content)**
+```lua
+-- Quick fix for black statusline
+:lua dofile('BLACK_STATUSLINE_FIX.lua').quick_fix()
+```
+
+#### **Intermittent Component Loading**
+```lua
+-- Fix intermittent loading issues
+:lua dofile('RELIABLE_COMPONENTS.lua').fix_intermittent_loading()
+```
+
+#### **Statusline Not Visible**
+```lua
+-- Force statusline visibility
+vim.o.statusline = ""
+vim.o.laststatus = 2
+vim.cmd("redraw!")
+```
+
+### **Working Configuration**
+
+If you're having issues, use this reliable configuration:
+
+```lua
+{
+  'sergiogallegos/lualine-max',
+  dependencies = { 'nvim-tree/nvim-web-devicons' },
+  config = function()
+    vim.o.statusline = ""
+    vim.o.laststatus = 2
+    
+    vim.defer_fn(function()
+      local ok, lualine = pcall(require, "lualine")
+      if ok then
+        lualine.setup({
+          options = { theme = 'auto' },
+          sections = {
+            lualine_a = { 'mode' },
+            lualine_b = { 'branch', 'diff' },
+            lualine_c = { 'filename' },
+            lualine_x = { 'filetype' },
+            lualine_y = { 'progress' },
+            lualine_z = { 'location' }
+          },
+        })
+        lualine.refresh()
+      else
+        vim.o.statusline = "%f %h%w%m%r %=%y %l,%c %P"
+      end
+    end, 100)
+  end
+}
+```
+
+See [TROUBLESHOOTING.md](./TROUBLESHOOTING.md) for complete troubleshooting guide.
+
 ## 🧪 Testing
 
 lualine-max includes comprehensive testing with 87.5% coverage:
