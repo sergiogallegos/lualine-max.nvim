@@ -1,4 +1,5 @@
 -- Copyright (c) 2020-2021 hoob3rt
+-- Copyright (c) 2025 Sergio Gallegos - lualine-max
 -- MIT license, see LICENSE for more details.
 local M = {}
 
@@ -10,7 +11,12 @@ local modules = lualine_require.lazy_require {
   utils = 'lualine.utils.utils',
   utils_notices = 'lualine.utils.notices',
   config_module = 'lualine.config',
+  modern_config = 'lualine.config.modern',
+  next_gen_config = 'lualine.config.next_gen',
   nvim_opts = 'lualine.utils.nvim_opts',
+  performance = 'lualine.utils.performance',
+  context_analyzer = 'lualine.ai.context_analyzer',
+  predictive_loader = 'lualine.utils.predictive_loader',
 }
 local config -- Stores currently applied config
 local timers = {
@@ -669,7 +675,7 @@ can use older compatible versions of lualine using compat tags like
 end
 
 -- lualine.setup function
---- sets new user config
+--- sets new user config with modern optimizations
 --- This function doesn't load components/theme etc... They are done before
 --- first statusline redraw and after new config. This is more efficient when
 --- lualine config is done in several setup calls as chunks. This way
@@ -683,7 +689,13 @@ local function setup(user_config)
     modules.utils_notices.clear_notices()
   end
   if verify_nvim_version() then
-    config = modules.config_module.apply_configuration(user_config)
+    -- Use next-generation configuration system with AI features
+    if user_config and (user_config.ai_features or user_config.performance) then
+      config = modules.next_gen_config.apply_next_gen_configuration(user_config)
+    else
+      config = modules.modern_config.apply_modern_configuration(user_config)
+    end
+    
     vim.cmd([[augroup lualine | exe "autocmd!" | augroup END]])
     setup_theme()
     -- load components & extensions
