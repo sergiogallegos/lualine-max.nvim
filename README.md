@@ -45,7 +45,25 @@ Created by **Sergio Gallegos** in September 2025, this is a complete reimagining
   'sergiogallegos/lualine-max',
   dependencies = { 'nvim-tree/nvim-web-devicons' },
   config = function()
-    require('lualine').setup()
+    -- Ensure statusline is visible
+    vim.o.statusline = ""
+    vim.o.laststatus = 2
+    
+    require('lualine').setup({
+      options = {
+        theme = 'auto', -- or 'minimal' for clean look
+        component_separators = { left = '', right = '' },
+        section_separators = { left = '', right = '' },
+      },
+      sections = {
+        lualine_a = { 'mode' },
+        lualine_b = { 'branch', 'diff' },
+        lualine_c = { 'filename' },
+        lualine_x = { 'filetype', 'encoding' },
+        lualine_y = { 'progress' },
+        lualine_z = { 'location' }
+      },
+    })
   end
 }
 ```
@@ -55,7 +73,24 @@ Created by **Sergio Gallegos** in September 2025, this is a complete reimagining
 ```lua
 use {
   'sergiogallegos/lualine-max',
-  requires = { 'nvim-tree/nvim-web-devicons', opt = true }
+  requires = { 'nvim-tree/nvim-web-devicons', opt = true },
+  config = function()
+    -- Ensure statusline is visible
+    vim.o.statusline = ""
+    vim.o.laststatus = 2
+    
+    require('lualine').setup({
+      options = { theme = 'auto' },
+      sections = {
+        lualine_a = { 'mode' },
+        lualine_b = { 'branch' },
+        lualine_c = { 'filename' },
+        lualine_x = { 'filetype' },
+        lualine_y = { 'progress' },
+        lualine_z = { 'location' }
+      },
+    })
+  end
 }
 ```
 
@@ -64,6 +99,25 @@ use {
 ```vim
 Plug 'sergiogallegos/lualine-max'
 Plug 'nvim-tree/nvim-web-devicons'
+
+" Add to your init.vim or .vimrc
+lua << EOF
+-- Ensure statusline is visible
+vim.o.statusline = ""
+vim.o.laststatus = 2
+
+require('lualine').setup({
+  options = { theme = 'auto' },
+  sections = {
+    lualine_a = { 'mode' },
+    lualine_b = { 'branch' },
+    lualine_c = { 'filename' },
+    lualine_x = { 'filetype' },
+    lualine_y = { 'progress' },
+    lualine_z = { 'location' }
+  },
+})
+EOF
 ```
 
 ## 🆚 lualine-max vs Original lualine.nvim
@@ -84,35 +138,80 @@ Plug 'nvim-tree/nvim-web-devicons'
 
 ## Quick Start
 
-### Minimal Configuration
+### Minimal Configuration (Recommended)
 
 ```lua
-require('lualine').setup()
-```
+-- Ensure statusline is visible
+vim.o.statusline = ""
+vim.o.laststatus = 2
 
-That's it! lualine-max comes with intelligent defaults that adapt to your colorscheme and provide a clean, minimalist statusline with AI-powered features.
-
-### Custom Configuration
-
-```lua
-require('lualine').setup {
+require('lualine').setup({
   options = {
-    theme = 'minimal', -- or 'auto' for automatic theme detection
+    theme = 'auto', -- Automatically adapts to your colorscheme
     component_separators = { left = '', right = '' },
     section_separators = { left = '', right = '' },
-    disabled_filetypes = {
-      statusline = { 'alpha', 'dashboard', 'lazy' },
-    },
   },
   sections = {
-    lualine_a = { 'modern_mode' },
-    lualine_b = { 'minimal_git' },
-    lualine_c = { 'smart_filename' },
+    lualine_a = { 'mode' },
+    lualine_b = { 'branch', 'diff' },
+    lualine_c = { 'filename' },
     lualine_x = { 'filetype', 'encoding' },
     lualine_y = { 'progress' },
-    lualine_z = { 'location' },
+    lualine_z = { 'location' }
   },
-}
+})
+```
+
+### With AI Features (Advanced)
+
+```lua
+-- Ensure statusline is visible
+vim.o.statusline = ""
+vim.o.laststatus = 2
+
+require('lualine').setup({
+  options = {
+    theme = 'minimal',
+    component_separators = { left = '', right = '' },
+    section_separators = { left = '', right = '' },
+  },
+  sections = {
+    lualine_a = { 'modern_mode' },      -- AI-powered mode indicator
+    lualine_b = { 'minimal_git' },      -- Smart git status
+    lualine_c = { 'smart_filename' },   -- Intelligent filename
+    lualine_x = { 'smart_diagnostics', 'filetype' }, -- Smart diagnostics
+    lualine_y = { 'progress' },
+    lualine_z = { 'location' }
+  },
+  ai_features = {
+    context_awareness = { enabled = true },
+    predictive_loading = { enabled = true },
+  },
+})
+```
+
+### Troubleshooting
+
+If statusline is not visible, try:
+
+```lua
+-- Force statusline visibility
+vim.o.statusline = ""
+vim.o.laststatus = 2
+vim.cmd("redraw!")
+
+-- Then setup lualine
+require('lualine').setup({
+  options = { theme = 'auto' },
+  sections = {
+    lualine_a = { 'mode' },
+    lualine_b = { 'branch' },
+    lualine_c = { 'filename' },
+    lualine_x = { 'filetype' },
+    lualine_y = { 'progress' },
+    lualine_z = { 'location' }
+  },
+})
 ```
 
 ## 🔄 Migration from Original lualine.nvim
@@ -364,6 +463,106 @@ require('lualine').setup({
 ```
 
 See [examples/safe_components.lua](./examples/safe_components.lua) for detailed component loading examples.
+
+## 📋 Configuration Examples
+
+### Basic Setup (Copy & Paste Ready)
+
+```lua
+-- For lazy.nvim
+{
+  'sergiogallegos/lualine-max',
+  dependencies = { 'nvim-tree/nvim-web-devicons' },
+  config = function()
+    vim.o.statusline = ""
+    vim.o.laststatus = 2
+    
+    require('lualine').setup({
+      options = { theme = 'auto' },
+      sections = {
+        lualine_a = { 'mode' },
+        lualine_b = { 'branch' },
+        lualine_c = { 'filename' },
+        lualine_x = { 'filetype' },
+        lualine_y = { 'progress' },
+        lualine_z = { 'location' }
+      },
+    })
+  end
+}
+```
+
+### AI-Powered Setup
+
+```lua
+-- For lazy.nvim with AI features
+{
+  'sergiogallegos/lualine-max',
+  dependencies = { 'nvim-tree/nvim-web-devicons' },
+  config = function()
+    vim.o.statusline = ""
+    vim.o.laststatus = 2
+    
+    require('lualine').setup({
+      options = {
+        theme = 'minimal',
+        component_separators = { left = '', right = '' },
+        section_separators = { left = '', right = '' },
+      },
+      sections = {
+        lualine_a = { 'modern_mode' },
+        lualine_b = { 'minimal_git' },
+        lualine_c = { 'smart_filename' },
+        lualine_x = { 'smart_diagnostics', 'filetype' },
+        lualine_y = { 'progress' },
+        lualine_z = { 'location' }
+      },
+      ai_features = {
+        context_awareness = { enabled = true },
+        predictive_loading = { enabled = true },
+      },
+    })
+  end
+}
+```
+
+### Ultra Performance Setup
+
+```lua
+-- For maximum performance
+{
+  'sergiogallegos/lualine-max',
+  dependencies = { 'nvim-tree/nvim-web-devicons' },
+  config = function()
+    vim.o.statusline = ""
+    vim.o.laststatus = 2
+    
+    require('lualine').setup({
+      options = {
+        theme = 'minimal',
+        component_separators = { left = '', right = '' },
+        section_separators = { left = '', right = '' },
+        refresh = {
+          statusline = 200,
+          refresh_time = 4, -- 240fps
+        },
+      },
+      sections = {
+        lualine_a = { 'mode' },
+        lualine_b = { 'branch' },
+        lualine_c = { 'filename' },
+        lualine_x = { 'filetype' },
+        lualine_y = { 'progress' },
+        lualine_z = { 'location' }
+      },
+      performance = {
+        smart_caching = { enabled = true },
+        lazy_loading = { enabled = true },
+      },
+    })
+  end
+}
+```
 
 ## 🧪 Testing
 
