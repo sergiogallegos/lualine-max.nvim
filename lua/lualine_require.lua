@@ -8,9 +8,9 @@ local luv = vim.uv or vim.loop
 -- Figures out full path of lualine installation
 local source = debug.getinfo(1, 'S').source
 if source:sub(1, 1) == '@' then
-  local base_start = source:find(table.concat({ 'lualine.nvim', 'lua', 'lualine_require.lua' }, M.sep))
+  local base_start = source:find(table.concat({ 'lualine-max.nvim', 'lua', 'lualine_require.lua' }, M.sep))
   if base_start then
-    source = source:sub(2, base_start + #'lualine.nvim/lua')
+    source = source:sub(2, base_start + #'lualine-max.nvim/lua')
     if source then
       M.plugin_dir = source
     end

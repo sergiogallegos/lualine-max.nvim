@@ -235,7 +235,7 @@ local function load_theme(theme_name)
       return string.match(a, pattern) or not string.match(b, pattern)
     end)
     -- More then 1 found . Use the first one that isn't in lualines repo
-    local lualine_repo_pattern = table.concat({ 'lualine.nvim', 'lua', 'lualine' }, sep)
+    local lualine_repo_pattern = table.concat({ 'lualine-max.nvim', 'lua', 'lualine' }, sep)
     local file_found = false
     for _, file in ipairs(files) do
       if not file:find(lualine_repo_pattern) then
