@@ -112,24 +112,6 @@ local function create_next_gen_config()
   }
 end
 
----@param user_config table|nil
----@return NextGenLualineConfig
-local function apply_next_gen_configuration(user_config)
-  local config = create_next_gen_config()
-  
-  if not user_config then
-    return config
-  end
-  
-  -- Deep merge user config with next-gen defaults
-  config = vim.tbl_deep_extend('force', config, user_config)
-  
-  -- Validate and optimize configuration
-  config = validate_next_gen_config(config)
-  
-  return config
-end
-
 ---@param config NextGenLualineConfig
 ---@return NextGenLualineConfig validated_config
 local function validate_next_gen_config(config)
@@ -168,6 +150,24 @@ local function validate_next_gen_config(config)
     config.options.refresh.refresh_time = math.max(4, config.options.refresh.refresh_time or 4)
     config.options.refresh.statusline = math.max(100, config.options.refresh.statusline or 300)
   end
+  
+  return config
+end
+
+---@param user_config table|nil
+---@return NextGenLualineConfig
+local function apply_next_gen_configuration(user_config)
+  local config = create_next_gen_config()
+  
+  if not user_config then
+    return config
+  end
+  
+  -- Deep merge user config with next-gen defaults
+  config = vim.tbl_deep_extend('force', config, user_config)
+  
+  -- Validate and optimize configuration
+  config = validate_next_gen_config(config)
   
   return config
 end
