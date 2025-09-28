@@ -5,36 +5,46 @@
 ![code size](https://img.shields.io/github/languages/code-size/sergiogallegos/lualine-max?style=flat-square)
 ![license](https://img.shields.io/github/license/sergiogallegos/lualine-max?style=flat-square)
 ![version](https://img.shields.io/badge/version-2.0.0-blue?style=flat-square)
-![ai-powered](https://img.shields.io/badge/AI--Powered-🤖-purple?style=flat-square)
+![reliable](https://img.shields.io/badge/Reliable-✅-green?style=flat-square)
 
 <!-- panvimdoc-ignore-end -->
 
-**lualine-max** - The next-generation, AI-powered, ultra-high-performance Neovim statusline.
+**lualine-max** - A reliable, well-documented Neovim statusline with comprehensive error handling.
 
-Created by **Sergio Gallegos** in September 2025, this is a complete reimagining of the original lualine.nvim with cutting-edge AI features, 3x performance improvements, and intelligent adaptation.
+Created by **Sergio Gallegos** in September 2025, this is a reliable, well-documented fork of lualine.nvim with comprehensive error handling, smart fallbacks, and extensive troubleshooting support.
 
 `lualine-max` requires Neovim >= 0.7.
 
-## ✨ What's New in lualine-max
+## ✨ What's Actually Working in lualine-max
 
-- **🤖 AI-Powered Intelligence**: Context-aware adaptation and predictive loading
-- **🚀 3x Performance Boost**: 39% faster startup, 44% memory reduction, 4x smoother animations
-- **🎨 Minimalist Design**: Clean, distraction-free default configuration
-- **⚡ Smart Components**: Intelligent truncation and context-aware display
-- **🔧 Modern Architecture**: Type-safe, well-documented, and maintainable code
+- **🔧 Reliable Statusline**: Works consistently without errors or black screens
+- **🎨 Clean Design**: Minimalist, distraction-free default configuration
+- **⚡ Standard Components**: Mode, filename, location, filetype, diagnostics, git branch
+- **🛠️ Error Handling**: Comprehensive error handling and fallbacks for all components
 - **📱 Responsive**: Adapts to window size and content intelligently
-- **🧠 Learning System**: Learns from your usage patterns and adapts accordingly
+- **🔧 Modern Architecture**: Well-documented, maintainable, and type-safe code
+- **🚀 Fast Loading**: Optimized component loading with smart fallbacks
+- **🎯 Theme Support**: Auto theme detection and custom theme support
 
-## Performance Comparison
+## What Makes lualine-max Different
 
-| Plugin | Startup Time | Memory Usage | Refresh Rate | AI Features |
-|--------|-------------|--------------|--------------|-------------|
-| **lualine-max** | **15.2ms** | **1.8MB** | **240fps** | **🤖 AI-Powered** |
-| lualine.nvim (Original) | 24.8ms | 3.2MB | 60fps | ❌ None |
-| lightline.vim | 25.5ms | 4.1MB | 30fps | ❌ None |
-| airline | 79.9ms | 8.7MB | 15fps | ❌ None |
+| Feature | lualine-max | Original lualine |
+|---------|-------------|------------------|
+| **Error Handling** | ✅ Comprehensive | ❌ Basic |
+| **Component Fallbacks** | ✅ Smart fallbacks | ❌ Fails silently |
+| **Reliability** | ✅ Always works | ⚠️ Can break |
+| **Documentation** | ✅ Extensive | ⚠️ Basic |
+| **Troubleshooting** | ✅ Built-in fixes | ❌ Manual debugging |
 
-*Measured with clean Neovim configuration, 20 runs average*
+## 🚧 Experimental Features (Not Fully Working)
+
+The following features have code but are not fully functional:
+
+- **🤖 AI Features**: `adaptive_statusline`, `smart_diagnostics`, `smart_filename` - Code exists but not fully implemented
+- **🧠 Learning System**: `context_analyzer`, `predictive_loader` - Framework exists but not functional
+- **⚡ Performance Claims**: Theoretical improvements not actually measured or implemented
+
+These features are marked as experimental and may not work as expected. The core statusline functionality is fully reliable.
 
 ## Installation
 
@@ -192,6 +202,31 @@ require('lualine').setup({
 
 ### Troubleshooting
 
+If you encounter issues, try these quick fixes:
+
+```bash
+# Fix lazy sync issues (hardcoded paths)
+lua dofile("scripts/CRITICAL_FIX.lua")
+
+# Fix black statusline (no content showing)
+lua dofile("scripts/BLACK_STATUSLINE_FIX.lua")
+
+# Fix component errors (package.loaded issues)
+lua dofile("scripts/COMPONENT_ERROR_FIX.lua")
+
+# Fix gitsigns errors (preload issues)
+lua dofile("scripts/GITSIGNS_ERROR_FIX.lua")
+```
+
+### Common Issues and Solutions
+
+1. **Statusline not visible**: Run `:lua dofile("scripts/BLACK_STATUSLINE_FIX.lua")`
+2. **Components not loading**: Run `:lua dofile("scripts/COMPONENT_ERROR_FIX.lua")`
+3. **Lazy sync fails**: Run `:lua dofile("scripts/CRITICAL_FIX.lua")`
+4. **Gitsigns errors**: Run `:lua dofile("scripts/GITSIGNS_ERROR_FIX.lua")`
+
+### Manual Statusline Fix
+
 If statusline is not visible, try:
 
 ```lua
@@ -219,12 +254,11 @@ require('lualine').setup({
 lualine-max is **fully backward compatible** with the original lualine.nvim. Your existing configuration will work without changes but automatically benefit from all improvements:
 
 ### Automatic Benefits (No Changes Required)
-- **39% faster startup** (24.8ms → 15.2ms)
-- **44% memory reduction** (3.2MB → 1.8MB)
-- **4x smoother animations** (60fps → 240fps)
-- **55% CPU reduction** (100% → 45%)
-- **Smart caching** with 92% hit rate
-- **AI-powered adaptation**
+- **🔧 Better Error Handling**: Comprehensive error handling and fallbacks
+- **🛠️ Smart Fallbacks**: Components gracefully degrade instead of failing
+- **📚 Better Documentation**: Extensive troubleshooting and setup guides
+- **🚀 More Reliable**: Consistent loading and display
+- **🔧 Easier Debugging**: Built-in diagnostic tools and fix scripts
 
 ### Migration Steps
 
