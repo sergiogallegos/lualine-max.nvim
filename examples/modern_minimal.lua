@@ -32,7 +32,7 @@ return {
     lualine_b = { 'minimal_git' },
     lualine_c = { 
       {
-        'smart_filename',
+        'filename',
         path = 1, -- relative path
         max_length = 40,
         smart_truncate = true,
@@ -53,7 +53,7 @@ return {
     lualine_b = {},
     lualine_c = { 
       {
-        'smart_filename',
+        'filename',
         path = 0, -- just filename for inactive
       }
     },

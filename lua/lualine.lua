@@ -12,11 +12,8 @@ local modules = lualine_require.lazy_require {
   utils_notices = 'lualine.utils.notices',
   config_module = 'lualine.config',
   modern_config = 'lualine.config.modern',
-  next_gen_config = 'lualine.config.next_gen',
   nvim_opts = 'lualine.utils.nvim_opts',
   performance = 'lualine.utils.performance',
-  context_analyzer = 'lualine.ai.context_analyzer',
-  predictive_loader = 'lualine.utils.predictive_loader',
 }
 local config -- Stores currently applied config
 local timers = {
@@ -689,12 +686,8 @@ local function setup(user_config)
     modules.utils_notices.clear_notices()
   end
   if verify_nvim_version() then
-    -- Use next-generation configuration system with AI features
-    if user_config and (user_config.ai_features or user_config.performance) then
-      config = modules.next_gen_config.apply_next_gen_configuration(user_config)
-    else
-      config = modules.modern_config.apply_modern_configuration(user_config)
-    end
+    -- Apply modern configuration
+    config = modules.modern_config.apply_modern_configuration(user_config)
     
     vim.cmd([[augroup lualine | exe "autocmd!" | augroup END]])
     setup_theme()

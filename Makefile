@@ -13,10 +13,10 @@ test:
 	@echo "🧪 Running lualine-max tests..."
 	@nvim --headless -c "lua require('tests.basic_test').run()" -c "qa!"
 
-# Run AI tests
-test-ai:
-	@echo "🤖 Running AI tests..."
-	@nvim --headless -c "lua require('tests.advanced_test').run()" -c "qa!"
+# Run component tests
+test-components:
+	@echo "🧩 Running component tests..."
+	@nvim --headless -c "lua require('tests.run_tests').run_component_tests()" -c "qa!"
 
 # Run performance tests
 test-performance:
@@ -52,7 +52,7 @@ help:
 	@echo ""
 	@echo "Available targets:"
 	@echo "  test              - Run all tests"
-	@echo "  test-ai           - Run AI integration tests"
+	@echo "  test-components   - Run component tests"
 	@echo "  test-performance  - Run performance benchmarks"
 	@echo "  test-coverage      - Run test coverage analysis"
 	@echo "  test-specific      - Run specific test (use TEST=test_name)"
@@ -62,6 +62,6 @@ help:
 	@echo ""
 	@echo "Examples:"
 	@echo "  make test"
-	@echo "  make test-ai"
+	@echo "  make test-components"
 	@echo "  make test-performance"
-	@echo "  make test-specific TEST=tests.ai.context_analyzer_spec"
+	@echo "  make test-specific TEST=tests.spec.component_spec"

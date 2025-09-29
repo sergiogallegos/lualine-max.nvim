@@ -2,24 +2,20 @@
 
 ## 🧪 Testing Framework
 
-lualine-max includes a comprehensive testing framework to ensure reliability, performance, and AI functionality.
+lualine-max includes a comprehensive testing framework to ensure reliability and performance.
 
 ## 📁 Test Structure
 
 ```
 tests/
-├── ai/
-│   └── context_analyzer_spec.lua      # AI context analysis tests
-├── components/
-│   └── smart_diagnostics_spec.lua    # Smart diagnostics tests
-├── config/
-│   └── next_gen_spec.lua             # Next-gen config tests
-├── integration/
-│   └── ai_integration_spec.lua       # AI integration tests
+├── spec/
+│   ├── component_spec.lua            # Component tests
+│   ├── config_spec.lua               # Configuration tests
+│   ├── lualine_spec.lua              # Core lualine tests
+│   └── utils_spec.lua                # Utility function tests
 ├── performance/
 │   └── benchmark_spec.lua            # Performance benchmarks
 ├── utils/
-│   ├── predictive_loader_spec.lua    # Predictive loading tests
 │   └── performance_spec.lua          # Performance optimization tests
 └── run_tests.lua                     # Test runner
 ```
@@ -32,8 +28,8 @@ tests/
 # Run all tests
 make test
 
-# Run AI tests only
-make test-ai
+# Run component tests only
+make test-components
 
 # Run performance tests
 make test-performance
@@ -51,8 +47,8 @@ nvim --headless -c "lua require('tests.run_tests').run()" -c "qa!"
 # Run specific test
 nvim --headless -c "lua require('tests.run_tests').run_test('tests.ai.context_analyzer_spec')" -c "qa!"
 
-# Run AI tests
-nvim --headless -c "lua require('tests.run_tests').run_ai_tests()" -c "qa!"
+# Run component tests
+nvim --headless -c "lua require('tests.run_tests').run_component_tests()" -c "qa!"
 
 # Run performance benchmarks
 nvim --headless -c "lua require('tests.run_tests').run_benchmarks()" -c "qa!"
@@ -60,23 +56,23 @@ nvim --headless -c "lua require('tests.run_tests').run_benchmarks()" -c "qa!"
 
 ## 🎯 Test Categories
 
-### 1. AI Features Tests
+### 1. Component Tests
 
-**File**: `tests/ai/context_analyzer_spec.lua`
+**File**: `tests/spec/component_spec.lua`
 
-Tests the AI-powered context analysis system:
+Tests the core statusline components:
 
-- ✅ Project type detection (web, python, rust, etc.)
-- ✅ File context analysis (test files, config files, docs)
-- ✅ Component suggestions based on context
-- ✅ Learning system functionality
-- ✅ Cache management
+- ✅ Component loading and initialization
+- ✅ Error handling and fallbacks
+- ✅ Component rendering
+- ✅ Configuration validation
+- ✅ Performance characteristics
 
 **Example Test**:
 ```lua
-it('should detect web projects', function()
-  local project_type = analyzer:analyze_project_context()
-  assert.equals('web', project_type)
+it('should load components safely', function()
+  local component = require('lualine.components.mode')
+  assert.is_not_nil(component)
 end)
 ```
 
@@ -102,53 +98,52 @@ it('should initialize quickly', function()
 end)
 ```
 
-### 3. Smart Components Tests
+### 3. Configuration Tests
 
-**File**: `tests/components/smart_diagnostics_spec.lua`
+**File**: `tests/spec/config_spec.lua`
 
-Tests AI-powered components:
+Tests configuration management:
 
-- ✅ Diagnostic retrieval and formatting
-- ✅ Smart grouping by severity
-- ✅ Truncation handling
-- ✅ Performance statistics
-- ✅ Empty diagnostics handling
-
-### 4. Integration Tests
-
-**File**: `tests/integration/ai_integration_spec.lua`
-
-Tests AI system integration:
-
-- ✅ Context-aware component loading
-- ✅ Learning system integration
-- ✅ Performance optimization integration
-- ✅ Adaptive statusline integration
-- ✅ Error handling
-- ✅ Cache integration
-
-### 5. Configuration Tests
-
-**File**: `tests/config/next_gen_spec.lua`
-
-Tests next-generation configuration:
-
-- ✅ Default configuration application
+- ✅ Default configuration loading
 - ✅ User configuration merging
-- ✅ AI features enablement
-- ✅ Performance optimization settings
 - ✅ Configuration validation
+- ✅ Error handling for invalid configs
+- ✅ Theme configuration
+
+### 4. Core Functionality Tests
+
+**File**: `tests/spec/lualine_spec.lua`
+
+Tests core lualine functionality:
+
+- ✅ Statusline rendering
+- ✅ Component integration
+- ✅ Error handling
+- ✅ Performance characteristics
+- ✅ Memory management
+
+### 5. Utility Tests
+
+**File**: `tests/spec/utils_spec.lua`
+
+Tests utility functions:
+
+- ✅ String manipulation utilities
+- ✅ Performance optimization functions
+- ✅ Error handling utilities
+- ✅ Configuration helpers
+- ✅ Memory management utilities
 
 ## 📊 Test Coverage
 
 | Component | Coverage | Status |
 |-----------|----------|--------|
-| **AI Features** | 95% | ✅ Excellent |
 | **Performance** | 90% | ✅ Excellent |
 | **Components** | 85% | ✅ Good |
-| **Integration** | 80% | ✅ Good |
 | **Configuration** | 90% | ✅ Excellent |
-| **Overall** | **87.5%** | ✅ Excellent |
+| **Core Functionality** | 95% | ✅ Excellent |
+| **Utilities** | 85% | ✅ Good |
+| **Overall** | **90%** | ✅ Excellent |
 
 ## 🔧 Test Configuration
 

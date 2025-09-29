@@ -38,7 +38,7 @@ return {
     },
     lualine_c = { 
       {
-        'smart_filename',
+        'filename',
         path = 0, -- Just filename for speed
         max_length = 30,
         smart_truncate = true,
@@ -53,7 +53,7 @@ return {
     lualine_b = {},
     lualine_c = { 
       {
-        'smart_filename',
+        'filename',
         path = 0,
         max_length = 25,
       }

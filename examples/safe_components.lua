@@ -29,10 +29,6 @@ end
 local fallback_map = {
   modern_mode = "mode",
   minimal_git = "branch",
-  smart_filename = "filename",
-  smart_diagnostics = "diagnostics",
-  adaptive_statusline = "mode",
-  adaptive_progress = "progress",
 }
 
 -- Create safe sections with fallbacks
@@ -40,9 +36,9 @@ local function create_safe_sections()
   return {
     lualine_a = { safe_component("modern_mode", "mode") },
     lualine_b = { safe_component("minimal_git", "branch") },
-    lualine_c = { safe_component("smart_filename", "filename") },
-    lualine_x = { safe_component("smart_diagnostics", "diagnostics"), "filetype" },
-    lualine_y = { safe_component("adaptive_progress", "progress") },
+    lualine_c = { safe_component("filename", "filename") },
+    lualine_x = { safe_component("diagnostics", "diagnostics"), "filetype" },
+    lualine_y = { safe_component("progress", "progress") },
     lualine_z = { "location" },
   }
 end
@@ -59,15 +55,15 @@ local function create_fallback_sections()
   }
 end
 
--- Smart section creator that tries custom first, falls back to standard
-local function create_smart_sections()
+-- Modern section creator that tries custom first, falls back to standard
+local function create_modern_sections()
   local sections = {}
   local custom_components = {
     lualine_a = { "modern_mode", "mode" },
     lualine_b = { "minimal_git", "branch" },
-    lualine_c = { "smart_filename", "filename" },
-    lualine_x = { "smart_diagnostics", "diagnostics" },
-    lualine_y = { "adaptive_progress", "progress" },
+    lualine_c = { "filename" },
+    lualine_x = { "diagnostics", "filetype" },
+    lualine_y = { "progress" },
     lualine_z = { "location" },
   }
   
@@ -93,8 +89,7 @@ end
 -- Validate component availability
 local function validate_components()
   local components_to_check = {
-    "modern_mode", "minimal_git", "smart_filename", 
-    "smart_diagnostics", "adaptive_statusline", "adaptive_progress"
+    "modern_mode", "minimal_git"
   }
   
   local results = {}
@@ -128,7 +123,7 @@ function M.setup()
       component_separators = { left = '', right = '' },
       section_separators = { left = '', right = '' },
     },
-    sections = create_smart_sections(),
+    sections = create_modern_sections(),
   }
   
   -- Try setup with custom components
@@ -164,9 +159,9 @@ function M.test_components()
     print(section .. ": " .. table.concat(components, ", "))
   end
   
-  print("\n🧠 Smart Component Loading:")
-  local smart_sections = create_smart_sections()
-  for section, components in pairs(smart_sections) do
+  print("\n🔧 Modern Component Loading:")
+  local modern_sections = create_modern_sections()
+  for section, components in pairs(modern_sections) do
     print(section .. ": " .. table.concat(components, ", "))
   end
   

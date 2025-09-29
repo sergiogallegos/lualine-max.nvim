@@ -6,11 +6,6 @@ local M = {}
 
 -- Register custom components
 local components = {
-  -- AI-powered components
-  'adaptive_statusline',
-  'smart_diagnostics',
-  'smart_filename',
-  
   -- Modern components
   'modern_mode',
   'minimal_git',
@@ -39,12 +34,6 @@ for _, component in ipairs(components) do
       M[component] = require('lualine.components.mode')
     elseif component == 'minimal_git' then
       M[component] = require('lualine.components.branch')
-    elseif component == 'smart_filename' then
-      M[component] = require('lualine.components.filename')
-    elseif component == 'smart_diagnostics' then
-      M[component] = require('lualine.components.diagnostics')
-    elseif component == 'adaptive_statusline' then
-      M[component] = require('lualine.components.mode')
     end
   end
 end
@@ -71,8 +60,7 @@ end
 -- Check component availability
 function M.check_components()
   local components_to_check = {
-    "modern_mode", "minimal_git", "smart_filename", 
-    "smart_diagnostics", "adaptive_statusline"
+    "modern_mode", "minimal_git"
   }
   
   local results = {}
@@ -89,8 +77,7 @@ end
 function M.get_custom_components()
   local custom_components = {}
   local components_to_check = {
-    "modern_mode", "minimal_git", "smart_filename", 
-    "smart_diagnostics", "adaptive_statusline"
+    "modern_mode", "minimal_git"
   }
   
   for _, comp in ipairs(components_to_check) do
